@@ -9,6 +9,15 @@ export default function PhotoCrop() {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
 
+  const handleSave = () => {
+    // first save cropped img
+    // saveCroppedImage(filename, imageSrc, croppedAreaPixels)
+    // then reset for the next photo
+    setImageSrc(null);
+    setZoom(1);
+    setCrop({ x: 0, y: 0 });
+  }
+
   const handleFileChange = async (e: any) => {
     if(e.target.files && e.target.files.length) {
       // we got a file...
@@ -36,6 +45,7 @@ export default function PhotoCrop() {
         onCropChange={setCrop}
         onZoomChange={setZoom}
         />
+        <button className="save-btn" onClick={handleSave}>Save</button>
     </>
   )
 };
